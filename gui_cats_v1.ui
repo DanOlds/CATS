@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1170</width>
-    <height>743</height>
+    <width>1247</width>
+    <height>758</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -83,25 +83,6 @@
     </property>
     <property name="value">
      <double>1.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QLabel" name="labRunNumber">
-    <property name="geometry">
-     <rect>
-      <x>820</x>
-      <y>80</y>
-      <width>101</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>101</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Run Number</string>
     </property>
    </widget>
    <widget class="QSpinBox" name="spinBox_RunMax">
@@ -181,25 +162,6 @@
      <string>Calculate Scores</string>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox_RunNumber">
-    <property name="geometry">
-     <rect>
-      <x>920</x>
-      <y>80</y>
-      <width>51</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="minimum">
-     <number>0</number>
-    </property>
-    <property name="maximum">
-     <number>0</number>
-    </property>
-    <property name="value">
-     <number>0</number>
-    </property>
-   </widget>
    <widget class="QPushButton" name="btnPlotAllScores">
     <property name="geometry">
      <rect>
@@ -256,25 +218,6 @@
     </property>
     <property name="text">
      <string>Run_Min</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnPlotParents">
-    <property name="geometry">
-     <rect>
-      <x>890</x>
-      <y>40</y>
-      <width>181</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>181</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Plot Mother and Father</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btnCheckFiles">
@@ -413,19 +356,6 @@
      <string>Load Files</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnPlotThisRun">
-    <property name="geometry">
-     <rect>
-      <x>1030</x>
-      <y>80</y>
-      <width>101</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Plot This Run</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="labAlarm">
     <property name="geometry">
      <rect>
@@ -450,158 +380,6 @@
     </property>
     <property name="text">
      <string>You should probably recalculate -&gt;</string>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="spinBox_RunNumber_2">
-    <property name="geometry">
-     <rect>
-      <x>910</x>
-      <y>150</y>
-      <width>51</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="minimum">
-     <number>0</number>
-    </property>
-    <property name="maximum">
-     <number>0</number>
-    </property>
-    <property name="value">
-     <number>0</number>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnPlotCompareRuns">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>1010</x>
-      <y>150</y>
-      <width>131</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Plot Both Runs</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="labRunNumber_2">
-    <property name="geometry">
-     <rect>
-      <x>810</x>
-      <y>150</y>
-      <width>91</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>91</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Another Run</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>930</x>
-      <y>120</y>
-      <width>121</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <underline>true</underline>
-     </font>
-    </property>
-    <property name="text">
-     <string>Compare Two Runs</string>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_diffOffset">
-    <property name="geometry">
-     <rect>
-      <x>901</x>
-      <y>190</y>
-      <width>71</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="minimum">
-     <double>-5.000000000000000</double>
-    </property>
-    <property name="maximum">
-     <double>5.000000000000000</double>
-    </property>
-    <property name="singleStep">
-     <double>0.100000000000000</double>
-    </property>
-   </widget>
-   <widget class="QLabel" name="labRunNumber_3">
-    <property name="geometry">
-     <rect>
-      <x>810</x>
-      <y>190</y>
-      <width>71</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Diff offset</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_firstRun">
-    <property name="geometry">
-     <rect>
-      <x>860</x>
-      <y>230</y>
-      <width>111</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Show First Run</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_secondRun">
-    <property name="geometry">
-     <rect>
-      <x>1010</x>
-      <y>230</y>
-      <width>141</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Show Second Run</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_diff">
-    <property name="geometry">
-     <rect>
-      <x>1010</x>
-      <y>200</y>
-      <width>131</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Show Difference</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
     </property>
    </widget>
    <widget class="Line" name="line_4">
@@ -771,24 +549,6 @@ increase Rmax and Rmin by deltaR up to the Rmax = Rtop</string>
      <string>Width Estimation</string>
     </property>
    </widget>
-   <widget class="Line" name="line_5">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>290</y>
-      <width>361</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <strikeout>false</strikeout>
-     </font>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
@@ -807,30 +567,6 @@ increase Rmax and Rmin by deltaR up to the Rmax = Rtop</string>
     <property name="text">
      <string> Extending R-range : Starting with Rmin/ max in Fit Parameters
     increase Rmax by a value of Delta R each time up to Rtop</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_9">
-    <property name="geometry">
-     <rect>
-      <x>940</x>
-      <y>15</y>
-      <width>111</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>111</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <underline>true</underline>
-     </font>
-    </property>
-    <property name="text">
-     <string>Basic Plotting</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_10">
@@ -1278,35 +1014,6 @@ increase Rmax and Rmin by deltaR up to the Rmax = Rtop</string>
      <string>Plot DCM</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_useSq">
-    <property name="geometry">
-     <rect>
-      <x>1000</x>
-      <y>270</y>
-      <width>82</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>use S(Q)</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioButton_useGr">
-    <property name="geometry">
-     <rect>
-      <x>920</x>
-      <y>270</y>
-      <width>82</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>use G(r)</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="Line" name="line_7">
     <property name="geometry">
      <rect>
@@ -1360,38 +1067,6 @@ increase Rmax and Rmin by deltaR up to the Rmax = Rtop</string>
     </property>
     <property name="text">
      <string>Feature Track Plot</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioButton_useId">
-    <property name="geometry">
-     <rect>
-      <x>1080</x>
-      <y>270</y>
-      <width>82</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>use I(d)</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_18">
-    <property name="geometry">
-     <rect>
-      <x>810</x>
-      <y>270</y>
-      <width>121</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>121</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Label Scheme:</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_19">
@@ -1542,132 +1217,6 @@ and fit result at once.</string>
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="PTE_cmap_choice">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>920</x>
-      <y>610</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="plainText">
-     <string>viridis</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="labRunNumber_4">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>610</y>
-      <width>111</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>111</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Colormap choice:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="labRunNumber_5">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>1010</x>
-      <y>610</y>
-      <width>71</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>71</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Use Cmin:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="labRunNumber_6">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>1010</x>
-      <y>650</y>
-      <width>71</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>71</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Use Cmax:</string>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_cmin">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>1090</x>
-      <y>610</y>
-      <width>62</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="minimum">
-     <double>-9999999.000000000000000</double>
-    </property>
-    <property name="maximum">
-     <double>99999999.000000000000000</double>
-    </property>
-    <property name="value">
-     <double>1.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_cmax">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>1090</x>
-      <y>650</y>
-      <width>62</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="minimum">
-     <double>-9999999.000000000000000</double>
-    </property>
-    <property name="maximum">
-     <double>99999999.000000000000000</double>
-    </property>
-    <property name="value">
-     <double>1.000000000000000</double>
-    </property>
-   </widget>
    <widget class="QPushButton" name="btnPlotFTM">
     <property name="enabled">
      <bool>false</bool>
@@ -1690,95 +1239,6 @@ and fit result at once.</string>
      <string>Plot Feature Track Map</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_defCMap">
-    <property name="geometry">
-     <rect>
-      <x>980</x>
-      <y>570</y>
-      <width>171</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>171</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Default Colormap</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_showCbar">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>860</x>
-      <y>650</y>
-      <width>121</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Show Colorbar</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_20">
-    <property name="geometry">
-     <rect>
-      <x>820</x>
-      <y>570</y>
-      <width>121</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>121</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <underline>true</underline>
-     </font>
-    </property>
-    <property name="text">
-     <string>Colormap Options:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_21">
-    <property name="geometry">
-     <rect>
-      <x>940</x>
-      <y>310</y>
-      <width>141</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="font">
-     <font>
-      <underline>true</underline>
-     </font>
-    </property>
-    <property name="text">
-     <string>Plot All Data</string>
-    </property>
-   </widget>
    <widget class="QCheckBox" name="checkBox_useR_for_Fsweep">
     <property name="geometry">
      <rect>
@@ -1795,182 +1255,689 @@ and fit result at once.</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnTopDownAll">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>820</x>
-      <y>340</y>
-      <width>111</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Top-Down Plot</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_useTDlimits">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>950</x>
-      <y>340</y>
-      <width>181</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>181</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Use Limits of Rmin/Rmax</string>
-    </property>
-    <property name="checked">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="labRunNumber_7">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>880</x>
-      <y>420</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Overlay Color:</string>
-    </property>
-   </widget>
-   <widget class="QPlainTextEdit" name="PTE_overlay_color">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>1000</x>
-      <y>420</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="plainText">
-     <string>white</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_overlayAvg">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>900</x>
-      <y>380</y>
-      <width>151</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Overlay Average Data</string>
-    </property>
-    <property name="checked">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_22">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>882</x>
-      <y>510</y>
-      <width>91</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Overlay Scale</string>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_OLayOffset">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>980</x>
-      <y>470</y>
-      <width>62</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="value">
-     <double>1.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_OLayScale">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>980</x>
-      <y>510</y>
-      <width>62</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="decimals">
-     <number>3</number>
-    </property>
-    <property name="value">
-     <double>1.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_23">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>882</x>
-      <y>470</y>
-      <width>91</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Overlay Offset</string>
-    </property>
-   </widget>
-   <widget class="Line" name="line_9">
+   <widget class="QFrame" name="frame_3">
     <property name="geometry">
      <rect>
       <x>800</x>
-      <y>550</y>
-      <width>361</width>
-      <height>20</height>
+      <y>0</y>
+      <width>440</width>
+      <height>691</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <strikeout>false</strikeout>
-     </font>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
     </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
     </property>
+    <layout class="QVBoxLayout" name="verticalLayout_6">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QFrame" name="frame_2">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <spacer name="horizontalSpacer_5">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_9">
+                <property name="minimumSize">
+                 <size>
+                  <width>111</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <underline>true</underline>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Basic Plotting</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_6">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayout_3">
+              <item row="1" column="1">
+               <widget class="QSpinBox" name="spinBox_RunNumber">
+                <property name="minimum">
+                 <number>0</number>
+                </property>
+                <property name="maximum">
+                 <number>0</number>
+                </property>
+                <property name="value">
+                 <number>0</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QPushButton" name="btnPlotThisRun">
+                <property name="text">
+                 <string>Plot This Run</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="labRunNumber">
+                <property name="minimumSize">
+                 <size>
+                  <width>101</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Run Number</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0" colspan="2">
+               <widget class="QPushButton" name="btnPlotParents">
+                <property name="minimumSize">
+                 <size>
+                  <width>181</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Plot Mother and Father</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <item>
+               <spacer name="horizontalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_2">
+                <property name="font">
+                 <font>
+                  <underline>true</underline>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Compare Two Runs</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_4">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayout_2">
+              <item row="2" column="1">
+               <widget class="QCheckBox" name="checkBox_firstRun">
+                <property name="text">
+                 <string>Show First Run</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QCheckBox" name="checkBox_secondRun">
+                <property name="text">
+                 <string>Show Second Run</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QDoubleSpinBox" name="doubleSpinBox_diffOffset">
+                <property name="minimum">
+                 <double>-5.000000000000000</double>
+                </property>
+                <property name="maximum">
+                 <double>5.000000000000000</double>
+                </property>
+                <property name="singleStep">
+                 <double>0.100000000000000</double>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QCheckBox" name="checkBox_diff">
+                <property name="text">
+                 <string>Show Difference</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="labRunNumber_3">
+                <property name="text">
+                 <string>Diff offset</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="labRunNumber_2">
+                <property name="minimumSize">
+                 <size>
+                  <width>91</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Another Run</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QSpinBox" name="spinBox_RunNumber_2">
+                <property name="minimum">
+                 <number>0</number>
+                </property>
+                <property name="maximum">
+                 <number>0</number>
+                </property>
+                <property name="value">
+                 <number>0</number>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QPushButton" name="btnPlotCompareRuns">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="text">
+                 <string>Plot Both Runs</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QLabel" name="label_18">
+                <property name="minimumSize">
+                 <size>
+                  <width>121</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Label Scheme:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QRadioButton" name="radioButton_useGr">
+                <property name="text">
+                 <string>use G(r)</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QRadioButton" name="radioButton_useSq">
+                <property name="text">
+                 <string>use S(Q)</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QRadioButton" name="radioButton_useId">
+                <property name="text">
+                 <string>use I(d)</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="Line" name="line_5">
+            <property name="font">
+             <font>
+              <strikeout>false</strikeout>
+             </font>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <spacer name="horizontalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_21">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <underline>true</underline>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Plot All Data</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QGridLayout" name="gridLayout">
+               <item row="6" column="0">
+                <widget class="QLabel" name="label_22">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>Overlay Scale</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QCheckBox" name="checkBox_overlayAvg">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>Overlay Average Data</string>
+                 </property>
+                 <property name="checked">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="label_23">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>Overlay Offset</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="1">
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_OLayScale">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="value">
+                  <double>1.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="labRunNumber_7">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>Overlay Color:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_OLayOffset">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="value">
+                  <double>1.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QPushButton" name="btnTopDownAll">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>Top-Down Plot</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QCheckBox" name="checkBox_useTDlimits">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>181</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Use Limits of Rmin/Rmax</string>
+                 </property>
+                 <property name="checked">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="PTE_overlay_color">
+                 <property name="text">
+                  <string>white</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="Line" name="line_9">
+               <property name="font">
+                <font>
+                 <strikeout>false</strikeout>
+                </font>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QLabel" name="label_20">
+              <property name="minimumSize">
+               <size>
+                <width>121</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <underline>true</underline>
+               </font>
+              </property>
+              <property name="text">
+               <string>Colormap Options:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_defCMap">
+              <property name="minimumSize">
+               <size>
+                <width>171</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Default Colormap</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QLabel" name="labRunNumber_4">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>111</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Colormap choice:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="PTE_cmap_choice">
+              <property name="text">
+               <string>viridis</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_8">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="labRunNumber_5">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>71</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Use Cmin:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="doubleSpinBox_cmin">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="minimum">
+               <double>-9999999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>99999999.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_8">
+            <item>
+             <widget class="QCheckBox" name="checkBox_showCbar">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Show Colorbar</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="labRunNumber_6">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>71</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Use Cmax:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="doubleSpinBox_cmax">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="minimum">
+               <double>-9999999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>99999999.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -1978,8 +1945,8 @@ and fit result at once.</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1170</width>
-     <height>21</height>
+     <width>1247</width>
+     <height>28</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSave_Menu">
@@ -2118,7 +2085,6 @@ and fit result at once.</string>
   <tabstop>spinBox_RunMin</tabstop>
   <tabstop>spinBox_RunMax</tabstop>
   <tabstop>btnCalcScores</tabstop>
-  <tabstop>btnPlotParents</tabstop>
   <tabstop>btnPlotAllScores</tabstop>
   <tabstop>spinBox_RunNumber</tabstop>
   <tabstop>btnPlotThisRun</tabstop>
