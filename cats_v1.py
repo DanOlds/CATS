@@ -401,7 +401,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 #    self.rmax = float(self.doubleSpinBox_Rmax.value())
 #    	print "loading files with rmax :"+str(self.rmax)
     	self.rdata, self.grdata = dan.read_in_all_runs_smart_list(self.fileList)
-        self.labSmile1.setText(" :)")
+        #self.labSmile1.setText(" :)")
         self.labAlarm.setText("   ")    
 
     	print "loaded "+str(len(self.grdata))
@@ -492,7 +492,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.doubleSpinBox_OLayScale.setValue(yspan)
    
     def get_preface(self):
-    	self.file_preface = str(self.plainTextEdit.toPlainText())
+    	self.file_preface = str(self.plainTextEdit.text())
     	#now count how many files exist with that preface
     	myPath = os.getcwd()
     	self.fileList = glob.glob1(myPath,self.file_preface+"*")
@@ -1130,7 +1130,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         plt.ylabel('$\phi_{mom}$')
         plt.show()
     
-    def top_down_show_data(self): #taco
+    def top_down_show_data(self): 
         plt.figure()
         
         if self.checkBox_useTDlimits.isChecked():
@@ -1149,7 +1149,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             plt.colorbar(label=self.use_yaxis_label)
 
         else:
-            use_cmap = str(self.PTE_cmap_choice.toPlainText())
+            use_cmap = str(self.PTE_cmap_choice.text())
             use_cmin = float(self.doubleSpinBox_cmin.value())
             use_cmax = float(self.doubleSpinBox_cmax.value())
             dan.top_down_plot(self.df_all_data.loc[srmin:srmax,runmin:runmax],cmap=use_cmap,cmin=use_cmin,cmax=use_cmax)        
@@ -1162,7 +1162,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         if self.checkBox_overlayAvg.isChecked():
             x = np.array(self.df_all_data.index)
             y = np.array(self.df_all_data.loc[:,:].mean(axis=1))
-            usecolor = str(self.PTE_overlay_color.toPlainText())
+            usecolor = str(self.PTE_overlay_color.text())
             yoffset = float(self.doubleSpinBox_OLayOffset.value())
             yscale = float(self.doubleSpinBox_OLayScale.value())
             plt.plot(x,y*yscale + yoffset,color=usecolor,linewidth=1)
@@ -1180,7 +1180,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             dan.top_down_plot(self.df_score,cmap='viridis')
             plt.colorbar(label='Rw')
         else: #read from user provided
-            use_cmap = str(self.PTE_cmap_choice.toPlainText())
+            use_cmap = str(self.PTE_cmap_choice.text())
             use_cmin = float(self.doubleSpinBox_cmin.value())
             use_cmax = float(self.doubleSpinBox_cmax.value())
             dan.top_down_plot(self.df_score,cmap=use_cmap,cmin=use_cmin,cmax=use_cmax)
