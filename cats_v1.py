@@ -1,6 +1,6 @@
 import sys
 from PyQt4 import QtCore, QtGui, uic
-import danfenitions as dan
+import danfinitions as dan
 import os
 import glob
 import numpy as np
@@ -129,6 +129,9 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.rTop = 0
         self.deadZone = 0     
 
+        self.datamin = 0.0
+        self.datamax = 1.0
+        
     def save_choice_vs_run_number(self,mode):
         self.labAlarm.setText(" ! ")
         self.notice_spinbox_values()
@@ -145,7 +148,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             
         #now for writing out
         default_name = "choice_vs_run_number_"+str(mode)+"col.dat"
-        file = QtGui.QFileDialog.getSaveFileName(self, "Your Data Ascends", default_name, ".dat")
+        file = QtGui.QFileDialog.getSaveFileName(self, "Save File", default_name, ".dat")
         file_created_info = "# This file contains scores of runs based on linear combination of two parents.\n"
         
         if mode == 2:
@@ -186,7 +189,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 
         date_is = time.strftime("%m/%d/%Y")
         time_is = time.strftime("%H:%M:%S")
-        file_created_info += "# This data generated with RKpdf Toolsuite on "+str(date_is)+" at "+str(time_is)+".\n"
+        file_created_info += "# This data generated with CATS on "+str(date_is)+" at "+str(time_is)+".\n"
         file_created_info += "\n"
         outfile = open(file,'w')
         outfile.write(file_created_info)
@@ -230,9 +233,13 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             self.labRunNumber_6.setEnabled(True)
             self.doubleSpinBox_cmax.setEnabled(True)
             self.checkBox_showCbar.setEnabled(True)
+            
+            self.doubleSpinBox_cmin.setValue(self.datamin)
+            self.doubleSpinBox_cmax.setValue(self.datamax)
+
         
     def possible_warning(self):
-        print "possible warning!!!"
+        #print "possible warning!!!"
         #for giving warning if parameters in spinboxes are different than those used to calculate fits recently
         self.notice_spinbox_values()
         still_ok = True
@@ -315,9 +322,9 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.residuals = np.zeros(len(self.rdata))
         #offset = len(self.rdata) - rng_was
         is_on = 0
-        print "length of mini_data is: "+str(len(mini_data))
-        print "range to loop over up to "+str(len(self.rdata))
-        print "run min/max is: "+str(self.runMin)+" "+str(self.runMax)
+        #print "length of mini_data is: "+str(len(mini_data))
+        #print "range to loop over up to "+str(len(self.rdata))
+        #print "run min/max is: "+str(self.runMin)+" "+str(self.runMax)
         for this_run in range(len(self.rdata)):
 #        for this_run in range(0,rng_was):
             #progress bar should probably go here
@@ -332,7 +339,13 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                 this_mini_dad = np.array(mini_dad)
                 this_mini_mom = np.array(mini_mom)
                 is_on += 1
-                popt, pcov = curve_fit(combo_data_simple, this_mini_r, this_mini_data, p0 = (.5))
+                try:
+                    popt, pcov = curve_fit(combo_data_simple, this_mini_r, this_mini_data, p0 = (.5), maxfev=1200)
+                    
+                except:
+                    print "Something went wrong, sorry about that."
+                    popt = 0.0
+                    break
                 res = this_mini_data[:] - combo_data_simple(mini_r,popt[0])
                 fres = sum(res**2)
                 self.fit_mom_fraction[this_run]=(np.exp(-(popt[0]**2)))
@@ -347,7 +360,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                 self.checkBox_ft_upfDad.setEnabled(True)
                 
         self.menuSave_Fits.setEnabled(True)
-        print "scored!"
+        #print "scored!"
         self.menuSave_Fitted_Choice.setEnabled(True)
                
     def load_mother_file(self):
@@ -401,9 +414,13 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 #    self.rmax = float(self.doubleSpinBox_Rmax.value())
 #    	print "loading files with rmax :"+str(self.rmax)
     	self.rdata, self.grdata = dan.read_in_all_runs_smart_list(self.fileList)
-        self.labSmile1.setText(" :)")
+        #self.labSmile1.setText(" :)")
         self.labAlarm.setText("   ")    
+        self.datamin = np.array(self.grdata).min().min()
+        self.datamax = np.array(self.grdata).max().max()
 
+        print "data min was "+str(self.datamin)
+        
     	print "loaded "+str(len(self.grdata))
     	print "saw an rmax of "+str(np.amax(self.rdata[0]))
         self.doubleSpinBox_Rmax.setValue(np.amax(self.rdata[0]))    
@@ -492,7 +509,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.doubleSpinBox_OLayScale.setValue(yspan)
    
     def get_preface(self):
-    	self.file_preface = str(self.plainTextEdit.toPlainText())
+    	self.file_preface = str(self.plainTextEdit.text())
     	#now count how many files exist with that preface
     	myPath = os.getcwd()
     	self.fileList = glob.glob1(myPath,self.file_preface+"*")
@@ -680,6 +697,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                         popt, pcov = curve_fit(combo_data_simple, this_mini_r, this_mini_data, p0 = 0.5, maxfev = 1200)
                     except:
                         print "I'm just going to quit, this isn't working"
+                        popt = 0
                         break
                     res = this_mini_data[:] - combo_data_simple(mini_r,popt[0])
                     fres = sum(res**2)
@@ -780,7 +798,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.possible_warning()
         
     def notice_spinbox_values(self):
-        print "I see things!"
+        #print "I see things!"
         self.rmax = float(self.doubleSpinBox_Rmax.value())
         self.rmin = float(self.doubleSpinBox_Rmin.value())
         self.runMin = int(self.spinBox_RunMin.value())#-1
@@ -791,12 +809,12 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         #save all data read in (regardless of R-range)
         self.labAlarm.setText(" ! ")
         default_name = "all_data_single_file.dat"
-        file = QtGui.QFileDialog.getSaveFileName(self, "Your Data Ascends", default_name, ".dat")
+        file = QtGui.QFileDialog.getSaveFileName(self, "Save File", default_name, ".dat")
         file_created_info = "# This file contains all data files, for ease of 3D plotting.\n"
         file_created_info += "# Recommend plotting in gnuplot with commands: set pm3d map, splot 'this_file.dat'\n"
         date_is = time.strftime("%m/%d/%Y")
         time_is = time.strftime("%H:%M:%S")
-        file_created_info += "# This data generated with RKpdf Toolsuite on "+str(date_is)+" at "+str(time_is)+".\n"
+        file_created_info += "# This data generated with CATS on "+str(date_is)+" at "+str(time_is)+".\n"
         outfile = open(file,'w')
         outfile.write(file_created_info)
 
@@ -816,14 +834,14 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         #save datafiles between Run_Min and Run_Max, Rmax to Rmin 
         self.labAlarm.setText(" ! ")
         default_name = "select_data_single_file.dat"
-        file = QtGui.QFileDialog.getSaveFileName(self, "Your Data Ascends", default_name, ".dat")
+        file = QtGui.QFileDialog.getSaveFileName(self, "Save File", default_name, ".dat")
         file_created_info = "# This file contains selected data files, for ease of 3D plotting.\n"
         file_created_info += "# runs between "+str(self.runMin)+" and "+str(self.runMax)+"\n"
         file_created_info += "# plotting in R between "+str(self.rmin)+" and "+str(self.rmax)+"\n"
         file_created_info += "# Recommend plotting in gnuplot with commands: set pm3d map, splot '"+str(default_name)+"'\n"
         date_is = time.strftime("%m/%d/%Y")
         time_is = time.strftime("%H:%M:%S")
-        file_created_info += "# This data generated with RKpdf Toolsuite on "+str(date_is)+" at "+str(time_is)+".\n"
+        file_created_info += "# This data generated with CATS on "+str(date_is)+" at "+str(time_is)+".\n"
         file_created_info += "\n"
         outfile = open(file,'w')
         outfile.write(file_created_info)
@@ -844,17 +862,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
     def save_alldifference_inRange_one_file(self):
         self.notice_spinbox_values()
         #save datafiles between Run_Min and Run_Max, Rmax to Rmin 
-        self.labAlarm.setText(" ! ")
-        
-        #question box for threshold
-#        reply = QtGui.QMessageBox.question(self, 'Noise level?',
-#            "Do you want to use a threshold noise-level?", QtGui.QMessageBox.Yes | 
-#            QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-#
-#        if reply == QtGui.QMessageBox.Yes:
-#            compare_to_stddev = True
-#        else:
-#            compare_to_stddev = False        
+        self.labAlarm.setText(" ! ")   
 
         
         noise_lvl_string, ok = QtGui.QInputDialog.getText(self, 'Noise Level?', 'Enter threshold of change to report:')
@@ -870,28 +878,19 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         
         
         default_name = "runTOrun_differences_single_file.dat"
-        file = QtGui.QFileDialog.getSaveFileName(self, "Your Data Ascends", default_name, ".dat")
+        file = QtGui.QFileDialog.getSaveFileName(self, "Save File", default_name, ".dat")
         file_created_info = "# This file contains selected run-to-run differences, for ease of 3D plotting.\n"
         file_created_info += "# runs between "+str(self.runMin)+" and "+str(self.runMax)+"\n"
         file_created_info += "# plotting in R between "+str(self.rmin)+" and "+str(self.rmax)+"\n"
         file_created_info += "# Recommend plotting in gnuplot with commands: set pm3d map, splot '"+str(default_name)+"'\n"
         date_is = time.strftime("%m/%d/%Y")
         time_is = time.strftime("%H:%M:%S")
-        file_created_info += "# This data generated with RKpdf Toolsuite on "+str(date_is)+" at "+str(time_is)+".\n"
+        file_created_info += "# This data generated with CATS on "+str(date_is)+" at "+str(time_is)+".\n"
         file_created_info += "\n"
         outfile = open(file,'w')
         outfile.write(file_created_info)
 
         
-        #something odd
-        #for j in range(1,len(self.rdata),2):
-        #    outfile2 = open("difference_set_"+str(j)+".dat",'w')    
-        #    print " I just opened file "+str(outfile)
-        #    for i in range(len(self.rdata[0])):
-        #            this_diff = self.grdata[j][i]- self.grdata[j-1][i]
-        #            outfile2.write(str(self.rdata[j][i])+" "+str(this_diff)+"\n")
-        #    outfile2.close()
-        #    print "I just closed it"
         for i in range(len(self.rdata[0])):
             if self.rdata[0][i] >= self.rmin and self.rdata[0][i] <= self.rmax:
                 for j in range(1,len(self.rdata)):
@@ -913,7 +912,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         # save the difference between parents (dad - mom)
         self.labAlarm.setText(" ! ")
         default_name = "parental_differences_"+str(choice)+"col.dat"
-        file = QtGui.QFileDialog.getSaveFileName(self, "Your Data Ascends", default_name, ".dat")
+        file = QtGui.QFileDialog.getSaveFileName(self, "Save File", default_name, ".dat")
         
         diff = []
         tot_diff = 0.0
@@ -929,7 +928,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         file_created_info += "# Sum of difference was : "+str(tot_diff)+" or "+str(tot_diff/float(len(self.rdata[0])+1))+" per r-value.\n"
         date_is = time.strftime("%m/%d/%Y")
         time_is = time.strftime("%H:%M:%S")
-        file_created_info += "# This data generated with RKpdf Toolsuite on "+str(date_is)+" at "+str(time_is)+".\n"
+        file_created_info += "# This data generated with CATS on "+str(date_is)+" at "+str(time_is)+".\n"
         file_created_info += "\n"        
         outfile = open(file,'w')
         outfile.write(file_created_info)
@@ -948,7 +947,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.notice_spinbox_values()
 
         default_name = "misfits_OneFile.dat"
-        file = QtGui.QFileDialog.getSaveFileName(self, "Your Data Ascends", default_name, ".dat")
+        file = QtGui.QFileDialog.getSaveFileName(self, "Save File", default_name, ".dat")
         file_created_info = "# This file contains all the misfit of data for ease of 3D plotting.\n"
         file_created_info += "# runs between "+str(self.runMin)+" and "+str(self.runMax)+"\n"
         file_created_info += "# plotting in R between "+str(self.rmin)+" and "+str(self.rmax)+"\n"
@@ -967,7 +966,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         file_created_info += "# Recommend plotting in gnuplot with commands: set pm3d map, splot 'this_file.dat'\n"
         date_is = time.strftime("%m/%d/%Y")
         time_is = time.strftime("%H:%M:%S")
-        file_created_info += "# This data generated with RKpdf Toolsuite on "+str(date_is)+" at "+str(time_is)+".\n"
+        file_created_info += "# This data generated with CATS on "+str(date_is)+" at "+str(time_is)+".\n"
         file_created_info += "\n"     
         outfile = open(file,'w')
         outfile.write(file_created_info)
@@ -1019,7 +1018,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                         file_created_info += "# Run_Max (highest run) used in fitting was "+str(int(self.recalc_params[3]))+"\n"
                 date_is = time.strftime("%m/%d/%Y")
                 time_is = time.strftime("%H:%M:%S")
-                file_created_info += "# This data generated with RKpdf Toolsuite on "+str(date_is)+" at "+str(time_is)+".\n"
+                file_created_info += "# This data generated with CATS on "+str(date_is)+" at "+str(time_is)+".\n"
 
                 outfile.write(file_created_info)
                 # metadata written into file, now write appropriate fits
@@ -1130,7 +1129,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         plt.ylabel('$\phi_{mom}$')
         plt.show()
     
-    def top_down_show_data(self): #taco
+    def top_down_show_data(self): 
         plt.figure()
         
         if self.checkBox_useTDlimits.isChecked():
@@ -1149,7 +1148,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             plt.colorbar(label=self.use_yaxis_label)
 
         else:
-            use_cmap = str(self.PTE_cmap_choice.toPlainText())
+            use_cmap = str(self.PTE_cmap_choice.text())
             use_cmin = float(self.doubleSpinBox_cmin.value())
             use_cmax = float(self.doubleSpinBox_cmax.value())
             dan.top_down_plot(self.df_all_data.loc[srmin:srmax,runmin:runmax],cmap=use_cmap,cmin=use_cmin,cmax=use_cmax)        
@@ -1162,7 +1161,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         if self.checkBox_overlayAvg.isChecked():
             x = np.array(self.df_all_data.index)
             y = np.array(self.df_all_data.loc[:,:].mean(axis=1))
-            usecolor = str(self.PTE_overlay_color.toPlainText())
+            usecolor = str(self.PTE_overlay_color.text())
             yoffset = float(self.doubleSpinBox_OLayOffset.value())
             yscale = float(self.doubleSpinBox_OLayScale.value())
             plt.plot(x,y*yscale + yoffset,color=usecolor,linewidth=1)
@@ -1180,7 +1179,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             dan.top_down_plot(self.df_score,cmap='viridis')
             plt.colorbar(label='Rw')
         else: #read from user provided
-            use_cmap = str(self.PTE_cmap_choice.toPlainText())
+            use_cmap = str(self.PTE_cmap_choice.text())
             use_cmin = float(self.doubleSpinBox_cmin.value())
             use_cmax = float(self.doubleSpinBox_cmax.value())
             dan.top_down_plot(self.df_score,cmap=use_cmap,cmin=use_cmin,cmax=use_cmax)
@@ -1220,6 +1219,8 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         df_local = self.df_all_data.loc[srmin:srmax,:]
         this_yaxis= ''
         
+        
+        
         double_feature = False
         if self.checkBox_ft_Int.isChecked():
             this_yaxis = str('$\sum_{a}^{b}$')+str(self.use_yaxis_label)
@@ -1238,6 +1239,15 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                 this_yaxis += str('$ + \phi_{dad}$')
                 other_feature_y = self.fit_dad_fraction
                 double_feature = True
+        
+        try:
+            feature_x
+        except:
+            print ("defaulting to intensity sum (you didn't select anything)")
+            this_yaxis = str('$\sum_{a}^{b}$')+str(self.use_yaxis_label)
+            feature_y = np.array(df_local.sum(axis=0))
+            feature_x = np.array(df_local.columns) 
+            self.checkBox_ft_Int.setChecked(True)
         
         plt.figure()
         plt.subplot(211)
@@ -1263,7 +1273,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.notice_spinbox_values()
 
         default_name = "all_fits_OneFile.dat"
-        file = QtGui.QFileDialog.getSaveFileName(self, "Your Data Ascends", default_name, ".dat")
+        file = QtGui.QFileDialog.getSaveFileName(self, "Save Menu", default_name, ".dat")
         file_created_info = "# This file contains all the fits for ease of 3D plotting.\n"
         file_created_info += "# runs between "+str(self.runMin)+" and "+str(self.runMax)+"\n"
         file_created_info += "# plotting in R between "+str(self.rmin)+" and "+str(self.rmax)+"\n"
@@ -1282,7 +1292,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         file_created_info += "# Recommend plotting in gnuplot with commands: set pm3d map, splot 'this_file.dat'\n"
         date_is = time.strftime("%m/%d/%Y")
         time_is = time.strftime("%H:%M:%S")
-        file_created_info += "# This data generated with RKpdf Toolsuite on "+str(date_is)+" at "+str(time_is)+".\n"
+        file_created_info += "# This data generated with CATS on "+str(date_is)+" at "+str(time_is)+".\n"
         file_created_info += "\n"
         outfile = open(file,'w')
         outfile.write(file_created_info)

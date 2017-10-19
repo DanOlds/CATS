@@ -111,8 +111,7 @@ def read_in_all_runs_smart_list(arg1):
     xdata = []
     ydata = []    
     number_of_runs = len(arg1)
-#    rmax = arg2
-    #base_name = arg2
+
     print "reading in this many runs: "+str(number_of_runs)
 
     for j in range(number_of_runs):
@@ -149,14 +148,11 @@ def read_in_all_runs_smart_list(arg1):
             
             #using found junk-length, assign data to xvals and yvals
             for i in range(junk_length+1,len(read_file)):
-#                xwouldbe = float(read_file[i].split()[0])
                 xwouldbe = read_file[i].split()[0]
                 if(is_number(xwouldbe)):                
-                #if(xwouldbe < rmax):
                     xvals.append(float(read_file[i].split()[0]))
                     yvals.append(float(read_file[i].split()[1]))
-                #else:
-                    pass
+
             xdata.append(xvals)
             ydata.append(yvals)
             
@@ -254,18 +250,13 @@ def calculate_scores_vs_r(arg1,arg2,arg3):
 #now calculate the scores of the datasets as a function of r (no scaling)
     fit_to_target = np.zeros([number_of_runs,len(targetdata)])
     fit_to_target_sum = np.zeros([number_of_runs,len(targetdata),len(ydata[0])])
- #   outfile_name = "a_scores_to_targets.dat"
- #   outfile = open(outfile_name,'w')
     for k in range(len(targetdata)):
         for j in range(number_of_runs):
             this_goodness = 0.0
             for i in range(len(ydata[0])):
                 this_goodness += abs((targetdata[k][i])-ydata[j][i])
                 fit_to_target_sum[j][k][i] = this_goodness
- #           outfile.write(str(j)+" "+str(this_goodness)+"\n")
             fit_to_target[j][k] = this_goodness
- #       outfile.write("\n")
- #   outfile.close()
     return fit_to_target, fit_to_target_sum
 
 def save_scores_vs_r(arg1):
