@@ -9,6 +9,8 @@ import time
 from scipy.optimize import curve_fit
 import math
 import pandas as pd
+import warnings
+
 
 qtCreatorFile = "gui_cats_v1.ui" # Enter file here.
  
@@ -325,6 +327,8 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         #print "length of mini_data is: "+str(len(mini_data))
         #print "range to loop over up to "+str(len(self.rdata))
         #print "run min/max is: "+str(self.runMin)+" "+str(self.runMax)
+        warnings.filterwarnings('ignore')
+
         for this_run in range(len(self.rdata)):
 #        for this_run in range(0,rng_was):
             #progress bar should probably go here
@@ -339,9 +343,9 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                 this_mini_dad = np.array(mini_dad)
                 this_mini_mom = np.array(mini_mom)
                 is_on += 1
+
                 try:
                     popt, pcov = curve_fit(combo_data_simple, this_mini_r, this_mini_data, p0 = (.5), maxfev=1200)
-                    
                 except:
                     print "Something went wrong, sorry about that."
                     popt = 0.0
@@ -362,6 +366,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.menuSave_Fits.setEnabled(True)
         #print "scored!"
         self.menuSave_Fitted_Choice.setEnabled(True)
+        warnings.filterwarnings('default')
                
     def load_mother_file(self):
         #open file explorer
@@ -680,6 +685,8 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                 
             this_residuals = np.zeros(len(self.rdata))
             is_on = 0
+            warnings.filterwarnings('ignore')
+
             for this_run in range(len(self.rdata)):
                 completed_per = 100.0 * float(this_run)/(float(self.runMax - self.runMin -1))
                 self.progressBar.setValue(completed_per)
@@ -709,6 +716,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                     resRdep_constRrng[i][this_run] = (fres)
                     
         self.progressBar_2.setValue(100.0)
+        warnings.filterwarnings('default')
 
     	myPath = os.getcwd()    
         if mode == 1:
