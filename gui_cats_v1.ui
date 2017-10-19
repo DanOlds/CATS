@@ -10,7 +10,11 @@
     <x>0</x>
     <y>0</y>
     <width>1336</width>
+<<<<<<< HEAD
     <height>830</height>
+=======
+    <height>833</height>
+>>>>>>> origin/master
    </rect>
   </property>
   <property name="minimumSize">
@@ -2042,7 +2046,11 @@ and fit result at once.</string>
          </size>
         </property>
         <property name="text">
+<<<<<<< HEAD
          <string>                                       Olds, D., et. al., (2017) J. Appl. Cryst. (accepted)</string>
+=======
+         <string>Part of Nano-by-DanO and RoboKate - an Advanced Diffraction Jam</string>
+>>>>>>> origin/master
         </property>
        </widget>
       </item>
@@ -2062,6 +2070,12 @@ and fit result at once.</string>
      </layout>
     </item>
    </layout>
+<<<<<<< HEAD
+=======
+   <zorder>label_5</zorder>
+   <zorder>labBoxWidth</zorder>
+   <zorder>labBoxWidth</zorder>
+>>>>>>> origin/master
    <zorder></zorder>
    <zorder></zorder>
   </widget>
@@ -2071,7 +2085,11 @@ and fit result at once.</string>
      <x>0</x>
      <y>0</y>
      <width>1336</width>
+<<<<<<< HEAD
      <height>21</height>
+=======
+     <height>28</height>
+>>>>>>> origin/master
     </rect>
    </property>
    <widget class="QMenu" name="menuSave_Menu">
