@@ -7,7 +7,7 @@ To accomplish this, open your anaconda terminal (download
 folder, and type the following command:
 
 ```
-conda env create python=2.7
+conda env create
 ```
 
 This will create a conda environment, downloading things as neccesary,
