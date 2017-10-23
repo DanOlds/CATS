@@ -194,19 +194,18 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         time_is = time.strftime("%H:%M:%S")
         file_created_info += "# This data generated with CATS on "+str(date_is)+" at "+str(time_is)+".\n"
         file_created_info += "\n"
-        outfile = open(file,'w')
-        outfile.write(file_created_info)
+        with open(file,'w') as outfile:
+            outfile.write(file_created_info)
 
-        for runs in np.arange(self.runMin,self.runMax+1):
-            this_mom_score = self.fit_mom_fraction[runs]
-            this_dad_score = self.fit_dad_fraction[runs]
-            if mode == 2:
-                outfile.write(str(x[runs])+" "+str(this_mom_score)+"\n")
-            elif mode == 3:
-                outfile.write(str(x[runs])+" "+str(this_mom_score)+" "+str(this_dad_score)+"\n")
-            elif mode == 4:
-                outfile.write(str(x[runs])+" "+str(this_mom_score)+" "+str(this_dad_score)+" "+str(norm_res[runs])+"\n")
-        outfile.close()
+            for runs in np.arange(self.runMin,self.runMax+1):
+                this_mom_score = self.fit_mom_fraction[runs]
+                this_dad_score = self.fit_dad_fraction[runs]
+                if mode == 2:
+                    outfile.write(str(x[runs])+" "+str(this_mom_score)+"\n")
+                elif mode == 3:
+                    outfile.write(str(x[runs])+" "+str(this_mom_score)+" "+str(this_dad_score)+"\n")
+                elif mode == 4:
+                    outfile.write(str(x[runs])+" "+str(this_mom_score)+" "+str(this_dad_score)+" "+str(norm_res[runs])+"\n")
         print("saved ok")
 
         self.labAlarm.setText("   ")
@@ -522,10 +521,9 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.number_of_runs = len(self.fileList)
         self.labNumFiles.setText("I can see "+str(self.number_of_runs)+ " files with that preface")
         self.fileList.sort()
-        flist_view = open('file_list_used.txt','w')
-        for i in range(len(self.fileList)):
-            flist_view.write(str(self.fileList[i])+"\n")
-        flist_view.close()
+        with open('file_list_used.txt','w') as flist_view:
+            for i in range(len(self.fileList)):
+                flist_view.write(str(self.fileList[i])+"\n")
 
         if self.number_of_runs > 0:
             self.btnLoadFiles.setEnabled(True)
@@ -727,23 +725,19 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         file_pref = QtGui.QFileDialog.getSaveFileName(self, "File preface?", default_name, "*")
 
         print("I'm just gonna print a couple of big'ol files for you")
-        outfile1 = open(str(file_pref)+"choices.dat",'w')
-        outfile2 = open(str(file_pref)+"residuals.dat",'w')
-        for i in range(len(fitsRdep_momfrac_constRrng)): #Rmax choice
-            for j in range(len(fitsRdep_momfrac_constRrng[0])): #run_number choice
-                if j >= self.runMin and j <= self.runMax:
-                    choice_was = ((1.0-fitsRdep_momfrac_constRrng[i][j]) - (fitsRdep_momfrac_constRrng[i][j]))
-                    if len(self.run_variables) > 0:
-                        outfile1.write(str(setOfRmaxs[i])+" "+str(self.run_variables[j])+" "+str(choice_was)+"\n")
-                        outfile2.write(str(setOfRmaxs[i])+" "+str(self.run_variables[j])+" "+str(resRdep_constRrng[i][j])+"\n")
-                    else:
-                        outfile1.write(str(setOfRmaxs[i])+" "+str(j)+" "+str(choice_was)+"\n")
-                        outfile2.write(str(setOfRmaxs[i])+" "+str(j)+" "+str(resRdep_constRrng[i][j])+"\n")
-            outfile1.write("\n")
-            outfile2.write("\n")
-        outfile1.close()
-        outfile2.close()
-
+        with open(str(file_pref)+"choices.dat",'w') as outfile1, open(str(file_pref)+"residuals.dat",'w') as outfile2:
+            for i in range(len(fitsRdep_momfrac_constRrng)): #Rmax choice
+                for j in range(len(fitsRdep_momfrac_constRrng[0])): #run_number choice
+                    if j >= self.runMin and j <= self.runMax:
+                        choice_was = ((1.0-fitsRdep_momfrac_constRrng[i][j]) - (fitsRdep_momfrac_constRrng[i][j]))
+                        if len(self.run_variables) > 0:
+                            outfile1.write(str(setOfRmaxs[i])+" "+str(self.run_variables[j])+" "+str(choice_was)+"\n")
+                            outfile2.write(str(setOfRmaxs[i])+" "+str(self.run_variables[j])+" "+str(resRdep_constRrng[i][j])+"\n")
+                        else:
+                            outfile1.write(str(setOfRmaxs[i])+" "+str(j)+" "+str(choice_was)+"\n")
+                            outfile2.write(str(setOfRmaxs[i])+" "+str(j)+" "+str(resRdep_constRrng[i][j])+"\n")
+                outfile1.write("\n")
+                outfile2.write("\n")
 
         print("all done")
 
@@ -824,17 +818,17 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         date_is = time.strftime("%m/%d/%Y")
         time_is = time.strftime("%H:%M:%S")
         file_created_info += "# This data generated with CATS on "+str(date_is)+" at "+str(time_is)+".\n"
-        outfile = open(file,'w')
-        outfile.write(file_created_info)
+        with open(file,'w') as outfile:
+            outfile.write(file_created_info)
 
-        for i in range(len(self.rdata[0])):
-            for j in range(len(self.rdata)):
-                if len(self.run_variables) > 0:
-                    outfile.write(str(self.rdata[j][i])+" "+str(self.run_variables[j])+" "+str(self.grdata[j][i])+"\n")
-                else:
-                    outfile.write(str(self.rdata[j][i])+" "+str(j)+" "+str(self.grdata[j][i])+"\n")
-            outfile.write("\n")
-        outfile.close()
+            for i in range(len(self.rdata[0])):
+                for j in range(len(self.rdata)):
+                    if len(self.run_variables) > 0:
+                        outfile.write(str(self.rdata[j][i])+" "+str(self.run_variables[j])+" "+str(self.grdata[j][i])+"\n")
+                    else:
+                        outfile.write(str(self.rdata[j][i])+" "+str(j)+" "+str(self.grdata[j][i])+"\n")
+                outfile.write("\n")
+
         print("saved ok")
         self.labAlarm.setText("   ")
 
@@ -852,19 +846,19 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         time_is = time.strftime("%H:%M:%S")
         file_created_info += "# This data generated with CATS on "+str(date_is)+" at "+str(time_is)+".\n"
         file_created_info += "\n"
-        outfile = open(file,'w')
-        outfile.write(file_created_info)
+        with open(file,'w') as outfile:
+            outfile.write(file_created_info)
 
-        for i in range(len(self.rdata[0])):
-            if self.rdata[0][i] >= self.rmin and self.rdata[0][i] <= self.rmax:
-                for j in range(len(self.rdata)):
-                    if j >= self.runMin and j <= self.runMax:
-                        if len(self.run_variables) > 0:
-                            outfile.write(str(self.rdata[j][i])+" "+str(self.run_variables[j])+" "+str(self.grdata[j][i])+"\n")
-                        else:
-                            outfile.write(str(self.rdata[j][i])+" "+str(j)+" "+str(self.grdata[j][i])+"\n")
-                outfile.write("\n")
-        outfile.close()
+            for i in range(len(self.rdata[0])):
+                if self.rdata[0][i] >= self.rmin and self.rdata[0][i] <= self.rmax:
+                    for j in range(len(self.rdata)):
+                        if j >= self.runMin and j <= self.runMax:
+                            if len(self.run_variables) > 0:
+                                outfile.write(str(self.rdata[j][i])+" "+str(self.run_variables[j])+" "+str(self.grdata[j][i])+"\n")
+                            else:
+                                outfile.write(str(self.rdata[j][i])+" "+str(j)+" "+str(self.grdata[j][i])+"\n")
+                    outfile.write("\n")
+
         print("saved ok")
         self.labAlarm.setText("   ")
 
@@ -896,23 +890,22 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         time_is = time.strftime("%H:%M:%S")
         file_created_info += "# This data generated with CATS on "+str(date_is)+" at "+str(time_is)+".\n"
         file_created_info += "\n"
-        outfile = open(file,'w')
-        outfile.write(file_created_info)
+        with open(file,'w') as outfile:
+            outfile.write(file_created_info)
 
+            for i in range(len(self.rdata[0])):
+                if self.rdata[0][i] >= self.rmin and self.rdata[0][i] <= self.rmax:
+                    for j in range(1,len(self.rdata)):
+                        if j >= self.runMin and j <= self.runMax:
+                            this_diff = self.grdata[j][i] - self.grdata[j-1][i]
+                            if abs(this_diff) < noise_lvl:
+                                this_diff = 0.0
+                            if len(self.run_variables) > 0:
+                                outfile.write(str(self.rdata[j][i])+" "+str(self.run_variables[j])+" "+str(this_diff)+"\n")
+                            else:
+                                outfile.write(str(self.rdata[j][i])+" "+str(j)+" "+str(this_diff)+"\n")
+                    outfile.write("\n")
 
-        for i in range(len(self.rdata[0])):
-            if self.rdata[0][i] >= self.rmin and self.rdata[0][i] <= self.rmax:
-                for j in range(1,len(self.rdata)):
-                    if j >= self.runMin and j <= self.runMax:
-                        this_diff = self.grdata[j][i] - self.grdata[j-1][i]
-                        if abs(this_diff) < noise_lvl:
-                            this_diff = 0.0
-                        if len(self.run_variables) > 0:
-                            outfile.write(str(self.rdata[j][i])+" "+str(self.run_variables[j])+" "+str(this_diff)+"\n")
-                        else:
-                            outfile.write(str(self.rdata[j][i])+" "+str(j)+" "+str(this_diff)+"\n")
-                outfile.write("\n")
-        outfile.close()
         print("saved ok")
         self.labAlarm.setText("   ")
 
@@ -939,14 +932,15 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         time_is = time.strftime("%H:%M:%S")
         file_created_info += "# This data generated with CATS on "+str(date_is)+" at "+str(time_is)+".\n"
         file_created_info += "\n"
-        outfile = open(file,'w')
-        outfile.write(file_created_info)
+        with open(file,'w') as outfile:
+            outfile.write(file_created_info)
 
-        for i in range(len(self.rdata[0])):
-            if choice == 2:
-                outfile.write(str(self.rdata[0][i])+" "+str(diff[i])+"\n")
-            elif choice == 4:
-                outfile.write(str(self.rdata[0][i])+" "+str(self.mom[0][i])+" "+str(self.dad[0][i])+" "+str(diff[i])+"\n")
+            for i in range(len(self.rdata[0])):
+                if choice == 2:
+                    outfile.write(str(self.rdata[0][i])+" "+str(diff[i])+"\n")
+                elif choice == 4:
+                    outfile.write(str(self.rdata[0][i])+" "+str(self.mom[0][i])+" "+str(self.dad[0][i])+" "+str(diff[i])+"\n")
+
         print("saved ok")
         self.labAlarm.setText("   ")
 
@@ -1303,22 +1297,22 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         time_is = time.strftime("%H:%M:%S")
         file_created_info += "# This data generated with CATS on "+str(date_is)+" at "+str(time_is)+".\n"
         file_created_info += "\n"
-        outfile = open(file,'w')
-        outfile.write(file_created_info)
-        #using current Rmin / Rmax values (and going over runs as defined by runMin/runMax)
-        for i in range(len(self.rdata[0])):
-            if self.rdata[0][i] >= self.rmin and self.rdata[0][i] <= self.rmax: # if in r-range we want
-                for j in range(len(self.rdata)): # go over each run
-                    if j>= self.runMin and j <= self.runMax:
-                        # calculate fit
-                        this_fit_val = self.fit_mom_fraction[j]*self.mom[0][i]+self.fit_dad_fraction[j]*self.dad[0][i]
-                        this_diff = this_fit_val - self.grdata[j][i]
-                        if len(self.run_variables) > 0:
-                            outfile.write(str(self.rdata[0][i])+" "+str(self.run_variables[j])+" "+str(this_fit_val)+"\n")
-                        else:
-                            outfile.write(str(self.rdata[0][i])+" "+str(j)+" "+str(this_fit_val)+"\n")
-                outfile.write("\n")
-        outfile.close()
+        with open(file,'w') as outfile:
+            outfile.write(file_created_info)
+            #using current Rmin / Rmax values (and going over runs as defined by runMin/runMax)
+            for i in range(len(self.rdata[0])):
+                if self.rdata[0][i] >= self.rmin and self.rdata[0][i] <= self.rmax: # if in r-range we want
+                    for j in range(len(self.rdata)): # go over each run
+                        if j>= self.runMin and j <= self.runMax:
+                            # calculate fit
+                            this_fit_val = self.fit_mom_fraction[j]*self.mom[0][i]+self.fit_dad_fraction[j]*self.dad[0][i]
+                            this_diff = this_fit_val - self.grdata[j][i]
+                            if len(self.run_variables) > 0:
+                                outfile.write(str(self.rdata[0][i])+" "+str(self.run_variables[j])+" "+str(this_fit_val)+"\n")
+                            else:
+                                outfile.write(str(self.rdata[0][i])+" "+str(j)+" "+str(this_fit_val)+"\n")
+                    outfile.write("\n")
+
         print("saved ok")
         self.labAlarm.setText("   ")
 
