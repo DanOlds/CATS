@@ -418,8 +418,8 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.labAlarm.setText(" ! ")
 
 #    self.rmax = float(self.doubleSpinBox_Rmax.value())
-#    	print "loading files with rmax :"+str(self.rmax)
-    	self.rdata, self.grdata = dan.read_in_all_runs_smart_list(self.fileList)
+#        print "loading files with rmax :"+str(self.rmax)
+        self.rdata, self.grdata = dan.read_in_all_runs_smart_list(self.fileList)
         #self.labSmile1.setText(" :)")
         self.labAlarm.setText("   ")
         self.datamin = np.array(self.grdata).min().min()
@@ -427,8 +427,8 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 
         print("data min was "+str(self.datamin))
 
-    	print("loaded "+str(len(self.grdata)))
-    	print("saw an rmax of "+str(np.amax(self.rdata[0])))
+        print("loaded "+str(len(self.grdata)))
+        print("saw an rmax of "+str(np.amax(self.rdata[0])))
         self.doubleSpinBox_Rmax.setValue(np.amax(self.rdata[0]))
         self.doubleSpinBox_Rmax.setMaximum(np.amax(self.rdata[0]))
         self.doubleSpinBox_Rmax.setMinimum(np.amin(self.rdata[0]))
@@ -515,22 +515,22 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.doubleSpinBox_OLayScale.setValue(yspan)
 
     def get_preface(self):
-    	self.file_preface = str(self.plainTextEdit.text())
-    	#now count how many files exist with that preface
-    	myPath = os.getcwd()
-    	self.fileList = glob.glob1(myPath,self.file_preface+"*")
-    	self.number_of_runs = len(self.fileList)
-    	self.labNumFiles.setText("I can see "+str(self.number_of_runs)+ " files with that preface")
+        self.file_preface = str(self.plainTextEdit.text())
+        #now count how many files exist with that preface
+        myPath = os.getcwd()
+        self.fileList = glob.glob1(myPath,self.file_preface+"*")
+        self.number_of_runs = len(self.fileList)
+        self.labNumFiles.setText("I can see "+str(self.number_of_runs)+ " files with that preface")
         self.fileList.sort()
-	flist_view = open('file_list_used.txt','w')
-	for i in range(len(self.fileList)):
-		flist_view.write(str(self.fileList[i])+"\n")
-	flist_view.close()
+        flist_view = open('file_list_used.txt','w')
+        for i in range(len(self.fileList)):
+            flist_view.write(str(self.fileList[i])+"\n")
+        flist_view.close()
 
-	if self.number_of_runs > 0:
-    		self.btnLoadFiles.setEnabled(True)
-    	else:
-    		self.btnLoadFiles.setEnabled(False)
+        if self.number_of_runs > 0:
+            self.btnLoadFiles.setEnabled(True)
+        else:
+            self.btnLoadFiles.setEnabled(False)
 
     def PlotTwoRuns(self):
         first_run = int(self.spinBox_RunNumber.value())
@@ -611,7 +611,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         plt.show()
 
     def say_hi(self):
-    	print("oh hey there")
+        print("oh hey there")
 
     def rdep_fit_const_rrange(self,mode):
         # mode = 1 -> box-car style (though variable spacing)
@@ -719,7 +719,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.progressBar_2.setValue(100.0)
         warnings.filterwarnings('default')
 
-    	myPath = os.getcwd()
+        myPath = os.getcwd()
         if mode == 1:
             default_name = "box_car_"
         elif mode == 2:
@@ -1049,9 +1049,9 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 
     def read_in_run_variable(self):
 
-    	#now count how many files exist with that preface
-    	myPath = os.getcwd()
-    	#self.fileList = glob.glob1(myPath,self.file_preface+"*")
+        #now count how many files exist with that preface
+        myPath = os.getcwd()
+        #self.fileList = glob.glob1(myPath,self.file_preface+"*")
 
         fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file')
         with open(fname, "r") as data:
