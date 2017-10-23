@@ -4,13 +4,14 @@ Created on Sun Jan 17 10:44:49 2016
 
 @author: d5o
 """
+from __future__ import print_function
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-def top_down_plot(data,**kwargs):    
+def top_down_plot(data,**kwargs):
     """plots 2D data from a pandas dataframe.  Requires that both index and column values of data frame be numeric!
-    Optional arguments are colormap minimum and maximum (cmin, cmax), colormap to use (cmap), x-min and x-max 
+    Optional arguments are colormap minimum and maximum (cmin, cmax), colormap to use (cmap), x-min and x-max
     (xmin, xmax), y-value min and max (ymin, ymax),  if you want gouraud-style blurring (blur = True, default False),
     and if you want a colorbar plotted (colorbar = True, default False)"""
     import matplotlib.pyplot as plt
@@ -28,9 +29,9 @@ def top_down_plot(data,**kwargs):
     ymax = max(data.columns)
     shading_choice = 'None'
     use_colorbar = False
-    
+
     if kwargs is not None:
-        for key, value in kwargs.items():
+        for key, value in list(kwargs.items()):
             #print ("%s set to %s" %(key,value))
             if key == 'xmin':
                 xmin = value
@@ -72,7 +73,7 @@ def is_number(arg1):
 def calc_rw(indata,infit,return_crw = False):
     fit = np.array(infit)
     data = np.array(indata)
-    
+
     if return_crw == False:
         top = sum((data-fit)**2.0)
         bottom = sum(data**2.0)
@@ -93,36 +94,36 @@ def calc_rw(indata,infit,return_crw = False):
                 vals[i] = 0.0
         vals = vals**(0.5)
         return vals
-    
-            
+
+
 def calc_residual(y1,y2,return_sum = True,return_abs = True):
     res = np.zeros(len(y1))
     if  return_abs == False:
         res = (y1 - y2)
     if return_abs == True:
         res = abs(y1 - y2)
-        
+
     if return_sum:
         return res.sum()
     else:
         return res
-            
+
 def read_in_all_runs_smart_list(arg1):
     xdata = []
-    ydata = []    
+    ydata = []
     number_of_runs = len(arg1)
 
-    print "reading in this many runs: "+str(number_of_runs)
+    print("reading in this many runs: "+str(number_of_runs))
 
     for j in range(number_of_runs):
         run_name = arg1[j]
-        print "file reading in: "+str(run_name)
+        print("file reading in: "+str(run_name))
         with open(run_name, "r") as data:
             read_file = data.readlines()
             #setup arrays
             xvals = []
             yvals = []
-            
+
             #determine own junk length
             for i in range(len(read_file)):
                 if len(read_file[i].strip()) > 0:
@@ -142,20 +143,20 @@ def read_in_all_runs_smart_list(arg1):
                             #print "found a start "+str(i)
                             junk_length = i - 1
                             break
-                            
+
             data_length = len(read_file)-junk_length
 
-            
+
             #using found junk-length, assign data to xvals and yvals
             for i in range(junk_length+1,len(read_file)):
                 xwouldbe = read_file[i].split()[0]
-                if(is_number(xwouldbe)):                
+                if(is_number(xwouldbe)):
                     xvals.append(float(read_file[i].split()[0]))
                     yvals.append(float(read_file[i].split()[1]))
 
             xdata.append(xvals)
             ydata.append(yvals)
-            
+
     return xdata, ydata
 
 def calculate_run_to_run_differences(arg1):
@@ -168,7 +169,7 @@ def calculate_run_to_run_differences(arg1):
         run_to_run_difference.append(this_difference)
     return run_to_run_difference
 
-def calculate_area_under_curves(arg1):    
+def calculate_area_under_curves(arg1):
 #calculate the total area under the curve for each dataset
     ydata = arg1
     number_of_runs = len(ydata)
@@ -203,7 +204,7 @@ def save_all_differences(arg1,arg2,arg3):
         outfile2.write("\n")
     outfile.close()
     outfile2.close()
-    
+
 def save_all_data_in_one_file(arg1,arg2):
     xdata = arg1
     ydata = arg2
@@ -219,7 +220,7 @@ def save_all_data_in_one_file(arg1,arg2):
         outfile.write("\n")
     outfile.close()
     outfile2.close()
-    
+
 def save_area_under_curves(arg1,arg2):
     xdata = arg1
     sum_area_under_curve = arg2
@@ -229,7 +230,7 @@ def save_area_under_curves(arg1,arg2):
         for i in range(len(xdata[j])):
             outfile.write(str(xdata[j][i])+" "+str(sum_area_under_curve[j][i])+"\n")
         outfile.write("\n")
-    outfile.close()   
+    outfile.close()
 
 
 def calculate_diff_of_sum_vs_r(arg1):
@@ -269,7 +270,7 @@ def save_scores_vs_r(arg1):
         outfile.write("\n")
     outfile.close()
 
-def save_scores_to_target_sum(arg1,arg2):   
+def save_scores_to_target_sum(arg1,arg2):
     xdata = arg1
     fit_to_target_sum = arg2
     number_of_runs = len(xdata)
@@ -281,49 +282,49 @@ def save_scores_to_target_sum(arg1,arg2):
                 outfile.write(str(xdata[0][i])+" "+str(fit_to_target_sum[j][k][i])+"\n")
             outfile.write("\n")
         outfile.close()
-    
+
 def make_average(arg1,arg2):
     ydata = arg1
     avg_list = arg2
     avg_data = np.zeros(len(ydata[0]))
-    for j in avg_list:    
+    for j in avg_list:
         for i in range(len(ydata[0])):
             avg_data[i] += ydata[j][i]
     avg_data[:] = avg_data[:] / (len(avg_list))
     return avg_data
-    
-    
+
+
 def make_std_dev(arg1,arg2,arg3):
     ydata = arg1
     avg_list = arg2
     avg_data = arg3
-    std_dev_list = np.zeros(len(ydata[0]))    
+    std_dev_list = np.zeros(len(ydata[0]))
     for i in avg_list:
         for j in range(len(ydata[0])):
             std_dev_list[j] += (avg_data[j]-ydata[i][j])**2
     std_dev_list[:] = std_dev_list[:] / len(avg_list)
     std_dev_list[:] = std_dev_list[:]**(0.5)
     return std_dev_list
-        
+
 
 def try_all_the_things(mom,dad,df,num_pts=101,confidence = 0.05,return_error_bars = True,return_full_res_map = False):
-        
+
     def two_parent_combo(mom,mom_frac,dad,dad_frac):
         return mom*mom_frac + dad*dad_frac
     df_phi_score = pd.DataFrame(index=np.linspace(0,1,num_pts),columns=df.columns,data=0)
 
-    
+
     best_phi_list = []
     best_res_list = []
 
     if confidence > 1.0:
         confidence *= .01
-    
+
     for cols in df_phi_score.columns:
-        
+
         best_phi = 0
         best_res = 1e15
-        
+
         test_data = df.loc[:,cols]
         for rows in df_phi_score.index:
             fit_frac = rows
@@ -335,16 +336,16 @@ def try_all_the_things(mom,dad,df,num_pts=101,confidence = 0.05,return_error_bar
                 best_phi = fit_frac
 
             df_phi_score.loc[rows,cols] = this_res
-        
+
         best_phi_list.append(best_phi)
         best_res_list.append(best_res)
-        
+
     best_phi_list = np.array(best_phi_list)
     best_res_list = np.array(best_res_list)
-    
+
     wbp_low_list = []
     wbp_high_list = []
-    
+
     if return_error_bars:
         for i in range(len(df_phi_score.columns)):
             cols = df.columns[i]
@@ -377,7 +378,7 @@ def try_all_the_things(mom,dad,df,num_pts=101,confidence = 0.05,return_error_bar
             return best_phi_list, best_res_list, wbp_high_list, wbp_low_list
         else : #return the full res_map
             return best_phi_list, best_res_list, wbp_high_list, wbp_low_list,df_phi_score
-    
+
     else : #don't bother with error bars
         if return_full_res_map == False:
             return best_phi_list, best_res_list

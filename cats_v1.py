@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sys
 from PyQt4 import QtCore, QtGui, uic
 import danfinitions as dan
@@ -206,14 +207,14 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             elif mode == 4:
                 outfile.write(str(x[runs])+" "+str(this_mom_score)+" "+str(this_dad_score)+" "+str(norm_res[runs])+"\n")
         outfile.close()
-        print "saved ok"
+        print("saved ok")
 
         self.labAlarm.setText("   ")
 
     def cmap_settings_update(self):
-        print "doing things!!!"
+        print("doing things!!!")
         if self.checkBox_defCMap.isChecked():
-            print "restoring defaults"
+            print("restoring defaults")
             self.labRunNumber_4.setEnabled(False)
             self.PTE_cmap_choice.setEnabled(False)
             self.labRunNumber_5.setEnabled(False)
@@ -227,7 +228,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             #self.doubleSpinBox_cmax.setValue(1.0)
 
         else:
-            print "enabling controls"
+            print("enabling controls")
             self.labRunNumber_4.setEnabled(True)
             self.PTE_cmap_choice.setEnabled(True)
             self.labRunNumber_5.setEnabled(True)
@@ -347,7 +348,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                 try:
                     popt, pcov = curve_fit(combo_data_simple, this_mini_r, this_mini_data, p0 = (.5), maxfev=1200)
                 except:
-                    print "Something went wrong, sorry about that."
+                    print("Something went wrong, sorry about that.")
                     popt = 0.0
                     break
                 res = this_mini_data[:] - combo_data_simple(mini_r,popt[0])
@@ -376,7 +377,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         this_list.append(name)
         momr,momgr = dan.read_in_all_runs_smart_list(this_list)
         self.mom.append(momgr[0])
-        print "mom is loaded"
+        print("mom is loaded")
         self.labMomFile.setText(str(os.path.basename(str(name))))
         self.MomExists = True
         if self.DadExists:
@@ -400,7 +401,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         this_list.append(name)
         dadr,dadgr = dan.read_in_all_runs_smart_list(this_list)
         self.dad.append(dadgr[0])
-        print "dad is loaded"
+        print("dad is loaded")
         self.labDadFile.setText(str(os.path.basename(str(name))))
         self.DadExists = True
         if self.MomExists:
@@ -424,10 +425,10 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.datamin = np.array(self.grdata).min().min()
         self.datamax = np.array(self.grdata).max().max()
 
-        print "data min was "+str(self.datamin)
+        print("data min was "+str(self.datamin))
 
-    	print "loaded "+str(len(self.grdata))
-    	print "saw an rmax of "+str(np.amax(self.rdata[0]))
+    	print("loaded "+str(len(self.grdata)))
+    	print("saw an rmax of "+str(np.amax(self.rdata[0])))
         self.doubleSpinBox_Rmax.setValue(np.amax(self.rdata[0]))
         self.doubleSpinBox_Rmax.setMaximum(np.amax(self.rdata[0]))
         self.doubleSpinBox_Rmax.setMinimum(np.amin(self.rdata[0]))
@@ -610,7 +611,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         plt.show()
 
     def say_hi(self):
-    	print "oh hey there"
+    	print("oh hey there")
 
     def rdep_fit_const_rrange(self,mode):
         # mode = 1 -> box-car style (though variable spacing)
@@ -626,20 +627,20 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         #figure out how many boxcars I need
         num_boxes = int(math.ceil((self.rTop - self.rmax) / self.deltaR))
         trueRtop = num_boxes * self.deltaR + self.rmax
-        print "num_boxes start at "+str(num_boxes)+" "+str(trueRtop)
+        print("num_boxes start at "+str(num_boxes)+" "+str(trueRtop))
         while trueRtop > self.rTop:
             num_boxes -= 1
             trueRtop = num_boxes * self.deltaR + self.rmax
-            print "dropped to "+str(num_boxes)+" "+str(trueRtop)
-        print "setteled on this "+str(num_boxes)+" "+str(trueRtop)
-        print "allocating a big'ol thingy"
+            print("dropped to "+str(num_boxes)+" "+str(trueRtop))
+        print("setteled on this "+str(num_boxes)+" "+str(trueRtop))
+        print("allocating a big'ol thingy")
 
         #lets keep track of each individual rmax
         setOfRmaxs = np.zeros(num_boxes+1)
         for i in range(len(setOfRmaxs)):
             setOfRmaxs[i] = i*self.deltaR + self.rmax
-        print "first Rmax will be "+str(setOfRmaxs[0])
-        print "last Rmax will be "+str(setOfRmaxs[len(setOfRmaxs)-1])
+        print("first Rmax will be "+str(setOfRmaxs[0]))
+        print("last Rmax will be "+str(setOfRmaxs[len(setOfRmaxs)-1]))
 
         fitsRdep_momfrac_constRrng = np.zeros((len(setOfRmaxs),len(self.grdata)))
         resRdep_constRrng = np.zeros((len(setOfRmaxs),len(self.grdata)))
@@ -652,7 +653,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             if mode == 2: #extending
                 this_rBottom = self.rmin
 
-            print "going over "+str(this_rBottom)+" "+str(this_rTop)
+            print("going over "+str(this_rBottom)+" "+str(this_rTop))
 #            for j in len(self.grdata): #for a specific dataset
 
             #make 'mini-mom' and 'mini-dad' for lsf procedure, which have dimensions rmin to rmax
@@ -661,7 +662,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             mini_r = np.zeros(len(self.rdata[0]))
             #mini_data = np.zeros(len(self.grdata[0]))
             mini_data = []
-            print "making tiny parents"
+            print("making tiny parents")
             for r in range(len(self.rdata[0])):
                 if self.rdata[0][r] >= this_rBottom and self.rdata[0][r] <= this_rTop:
                     mini_mom[r] = (self.mom[0][r])
@@ -703,7 +704,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                     try:
                         popt, pcov = curve_fit(combo_data_simple, this_mini_r, this_mini_data, p0 = 0.5, maxfev = 1200)
                     except:
-                        print "I'm just going to quit, this isn't working"
+                        print("I'm just going to quit, this isn't working")
                         popt = 0
                         break
                     res = this_mini_data[:] - combo_data_simple(mini_r,popt[0])
@@ -725,7 +726,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             default_name = "extending_rmax_"
         file_pref = QtGui.QFileDialog.getSaveFileName(self, "File preface?", default_name, "*")
 
-        print "I'm just gonna print a couple of big'ol files for you"
+        print("I'm just gonna print a couple of big'ol files for you")
         outfile1 = open(str(file_pref)+"choices.dat",'w')
         outfile2 = open(str(file_pref)+"residuals.dat",'w')
         for i in range(len(fitsRdep_momfrac_constRrng)): #Rmax choice
@@ -744,11 +745,11 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         outfile2.close()
 
 
-        print "all done"
+        print("all done")
 
     def update_axis_labels(self):
         if self.radioButton_useGr.isChecked():
-            print "G(r)-language"
+            print("G(r)-language")
             self.use_xaxis_label = 'r ($\AA$)'
             self.use_yaxis_label = 'G(r)'
             self.labRmin.setText('Rmin')
@@ -767,7 +768,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 
 
         if self.radioButton_useId.isChecked():
-            print "I(d)-language"
+            print("I(d)-language")
             self.use_xaxis_label = 'd ($\AA$)'
             self.use_yaxis_label = 'I(d)'
             self.labRmin.setText('dmin')
@@ -786,7 +787,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 
 
         if self.radioButton_useSq.isChecked():
-            print "S(Q)-language"
+            print("S(Q)-language")
             self.use_xaxis_label = 'Q ($\AA^{-1}$)'
             self.use_yaxis_label = 'S(Q)'
             self.labRmin.setText('Qmin')
@@ -834,7 +835,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                     outfile.write(str(self.rdata[j][i])+" "+str(j)+" "+str(self.grdata[j][i])+"\n")
             outfile.write("\n")
         outfile.close()
-        print "saved ok"
+        print("saved ok")
         self.labAlarm.setText("   ")
 
     def save_alldata_inRange_one_file(self):
@@ -864,7 +865,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                             outfile.write(str(self.rdata[j][i])+" "+str(j)+" "+str(self.grdata[j][i])+"\n")
                 outfile.write("\n")
         outfile.close()
-        print "saved ok"
+        print("saved ok")
         self.labAlarm.setText("   ")
 
     def save_alldifference_inRange_one_file(self):
@@ -875,13 +876,13 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 
         noise_lvl_string, ok = QtGui.QInputDialog.getText(self, 'Noise Level?', 'Enter threshold of change to report:')
         if len(noise_lvl_string) == 0:
-            print "nothing entered, default is 0"
+            print("nothing entered, default is 0")
             noise_lvl = 0.0
         else:
             try:
                 noise_lvl = float(noise_lvl_string)
             except:
-                print "weird "+str(noise_lvl_string)
+                print("weird "+str(noise_lvl_string))
                 noise_lvl = 0.0
 
 
@@ -912,7 +913,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                             outfile.write(str(self.rdata[j][i])+" "+str(j)+" "+str(this_diff)+"\n")
                 outfile.write("\n")
         outfile.close()
-        print "saved ok"
+        print("saved ok")
         self.labAlarm.setText("   ")
 
 
@@ -946,7 +947,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                 outfile.write(str(self.rdata[0][i])+" "+str(diff[i])+"\n")
             elif choice == 4:
                 outfile.write(str(self.rdata[0][i])+" "+str(self.mom[0][i])+" "+str(self.dad[0][i])+" "+str(diff[i])+"\n")
-        print "saved ok"
+        print("saved ok")
         self.labAlarm.setText("   ")
 
     def save_misfit_onebigfile(self):
@@ -992,7 +993,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                             outfile.write(str(self.rdata[0][i])+" "+str(j)+" "+str(this_diff)+"\n")
                 outfile.write("\n")
         outfile.close()
-        print "saved ok"
+        print("saved ok")
         self.labAlarm.setText("   ")
 
     def save_each_fit(self,choice):
@@ -1002,7 +1003,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 
         default_name = "each_fit_"+str(choice)+"col_"
         preface = QtGui.QFileDialog.getSaveFileName(self, "Pick a prefix", default_name, "")
-        print "default name "+str(preface)
+        print("default name "+str(preface))
         for each_fit in range(len(self.rdata)):
             if each_fit <= self.runMax and each_fit >= self.runMin:
                 this_file_name = preface+str(each_fit)+".dat"
@@ -1043,7 +1044,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                             outfile.write(str(self.rdata[0][r])+" "+str(this_fit_val)+" "+str(this_diff)+"\n")
 
                 outfile.close()
-        print "saved ok"
+        print("saved ok")
         self.labAlarm.setText("   ")
 
     def read_in_run_variable(self):
@@ -1056,7 +1057,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         with open(fname, "r") as data:
             read_file = data.readlines()
 
-        print "file length was: "+str(len(read_file))
+        print("file length was: "+str(len(read_file)))
         file_names = []
         variables = []
         for i in range(len(read_file)):
@@ -1064,9 +1065,9 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             self.run_variables.append(read_file[i].split()[1])
         #this_list = glob.glob1(myPath,fname)
 
-        print "first file name is : "+str(file_names[0])
-        print "first value is : "+str(self.run_variables[0])
-        print "last value is: "+str(file_names[len(read_file)-1])+" "+str(self.run_variables[len(read_file)-1])
+        print("first file name is : "+str(file_names[0]))
+        print("first value is : "+str(self.run_variables[0]))
+        print("last value is: "+str(file_names[len(read_file)-1])+" "+str(self.run_variables[len(read_file)-1]))
         #self.run_variables = variables
 
     def similarity_matrix(self):
@@ -1218,10 +1219,10 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 
 
     def show_feature_track_map(self):
-        print "well this is a fine mess"
+        print("well this is a fine mess")
         srmin = float(self.doubleSpinBox_FTRmin.value())
         srmax = float(self.doubleSpinBox_FTRmax.value())
-        print "Display from rmin/rmax "+str(srmin)+ "to "+str(srmax)
+        print("Display from rmin/rmax "+str(srmin)+ "to "+str(srmax))
 
         #setup things for first plot
         df_local = self.df_all_data.loc[srmin:srmax,:]
@@ -1318,7 +1319,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                             outfile.write(str(self.rdata[0][i])+" "+str(j)+" "+str(this_fit_val)+"\n")
                 outfile.write("\n")
         outfile.close()
-        print "saved ok"
+        print("saved ok")
         self.labAlarm.setText("   ")
 
 
