@@ -1,13 +1,12 @@
 name: cats_python
 dependencies:
 - libpng
-- matplotlib=1.5
+- matplotlib
 - numpy
-- pandas=0.19.2
-- pyqt=4.11
-- python=2.7
+- pandas
+- pyqt=4
 - python-dateutil
-- qt=4.8
+- qt=4
 - scipy
 - setuptools
 - sip
